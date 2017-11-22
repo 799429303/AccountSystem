@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <title>注册</title>
+    <style>
+        .invalid {
+            color:red;
+            font-size:14px;
+        }
+        body {
+            padding-top:30px;
+            padding-bottom:30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <form id="form1">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="用户名" />
+                        <span class="con-username-notice" style="display: none; color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="密码" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="con_password" placeholder="确认密码" />
+                        <span class="con-pw-notice" style="display: none; color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-default" name="btnRegister" value="注册" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">提示</h4>
+          </div>
+          <div class="modal-body">
+             <p></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"  >Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../Scripts/jquery.validate.js"></script>
+<script>
+    $("input[name='btnRegister']").click
+    (
+        function () {
+            if ($("#form1").valid() == false) {
+                $("#myModal .modal-body p").text("表单中存在错误，请修改!");
+                $('#myModal').modal('show');
+                return;
+            }
+
+            $.post
+            (
+               "Register/Register", { username: $("input[name='username']").val(), password: $("input[name='password']").val() },
+               function (msg) {
+                   if (msg == "SUCCESS") {
+                       $("#myModal .btn").on("click",
+                           function () {
+                               location.href = "/login/index";
+                           });
+                       $("#myModal .modal-body p").text("注册成功!");
+                       $('#myModal').modal('show');
+                   }
+                   else
+                   {
+                       $("#myModal .modal-body p").text("未知原因注册失败，请重试!");
+                       $('#myModal').modal('show');
+                   }
+               }
+             )
+        }
+      );
+    //$("input[name='con-password']").focusout
+    //    (
+    //      function () {
+    //          var password = $("input[name='password']").val();
+    //          var con_password = $("input[name='con-password']").val();
+    //          if (password != con_password) {
+    //              $(".con-pw-notice").css("display", "inline");
+    //              $(".con-pw-notice").html("两次密码不一致!")
+    //              canRegister = false;
+    //          }
+    //          else {
+    //              $(".con-pw-notice").css("display", "none");
+    //              canRegister = true;
+    //          }
+
+    //      }
+    //    );
+    // $("input[name='username']").focusout
+    // (
+    //     function ()
+    //     {
+    //         if ($("input[name='username']").val() == "") {
+    //             $(".con-username-notice").css("display", "inline");
+    //             $(".con-username-notice").html("用户名不能为空!")
+    //             canRegister = false;
+    //         }
+    //         else
+    //         {
+    //             $(".con-username-notice").css("display", "none");
+    //             canRegister = true;
+    //         }
+    //     }
+    //);
+    $(
+        function () {
+            $("#form1").validate
+                (
+                    {
+                        rules:
+                            {
+                                username:
+                                    {
+                                        required: true,
+                                        remote: 
+                                            {
+                                                url: "/Register/CheckUser",
+                                                type: "Post"
+                                                
+                                            }
+                                    },
+                                password:
+                                {
+                                    required: true,
+
+                                },
+                                con_password:
+                                {
+                                    required: true,
+                                    equalTo: "input[name='password']"
+                                }
+                            },
+                        messages:
+                            {
+                                username:
+                                {
+                                    required: "请输入用户名",
+                                    remote:"用户名已经被注册"
+                                },
+                                password:
+                                {
+                                    required: "请输入密码"
+
+                                },
+                                con_password:
+                                {
+                                    required: "请输入密码",
+                                    equalTo: "两次输入的密码不一致"
+                                }
+                            },
+                        focusInvalid: true,
+                        focusCleanup: true,
+                        errorClass: "invalid"
+                    }
+
+                );
+        }
+    );
+
+    function clearPreviousValue() {
+        if ($(".remote").data("previousValue")) {
+            $(".remote").data("previousValue").old = null;
+        }
+    };
+
+    $("input[name='username']").change(function () {
+        clearPreviousValue();
+    });
+</script>

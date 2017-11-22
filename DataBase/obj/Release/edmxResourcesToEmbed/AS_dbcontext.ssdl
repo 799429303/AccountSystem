@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AccountSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AS_user">
+    <Key>
+      <PropertyRef Name="uuid" />
+    </Key>
+    <Property Name="uuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="userid" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AS_user_website">
+    <Key>
+      <PropertyRef Name="userid" />
+      <PropertyRef Name="website" />
+    </Key>
+    <Property Name="uuid" Type="varchar" MaxLength="50" />
+    <Property Name="userid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="website" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="AS_website">
+    <Key>
+      <PropertyRef Name="uuid" />
+    </Key>
+    <Property Name="uuid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userid" Type="nvarchar" MaxLength="50" />
+    <Property Name="website" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="AccountSysModelStoreContainer">
+    <EntitySet Name="AS_user" EntityType="Self.AS_user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AS_user_website" EntityType="Self.AS_user_website" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AS_website" EntityType="Self.AS_website" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

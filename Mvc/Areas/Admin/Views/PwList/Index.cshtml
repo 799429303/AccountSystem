@@ -1,0 +1,144 @@
+﻿<html>
+<head>
+    <title>账号密码网站列表</title>
+</head>
+<body>
+    <table id="table-list" class="table">
+    </table>
+
+    <input type="button" name="btnAdd" class="btn" value="添加" />
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+</html>
+
+<script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(function ()
+    {
+
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //2.初始化Button的点击事件
+        /* var oButtonInit = new ButtonInit();
+        oButtonInit.Init(); */
+
+    });
+
+
+    var TableInit = function ()
+    {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function ()
+        {
+            $('#table-list').bootstrapTable({
+                url: '/PwList/GetList',         //请求后台的URL（*）
+                method: 'post',                      //请求方式（*）
+                //toolbar: '#toolbar',                //工具按钮用哪个容器
+                //striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                //pagination: true,                   //是否显示分页（*）
+                sortable: false,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                //queryParams: oTableInit.queryParams,//传递参数（*）
+                //sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                //pageNumber: 1,                       //初始化加载第一页，默认第一页
+                //pageSize: 50,                       //每页的记录行数（*）
+                //pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                //strictSearch: true,
+                //clickToSelect: true,                //是否启用点击选中行
+                height: 460,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "uuid",                     //每一行的唯一标识，一般为主键列
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                   //是否显示父子表
+                columns: [{
+                    field: "uuid",
+                    title: '序号',
+                    visible: false,
+
+                }, {
+                    field: "userid",
+                    title: "用户ID",
+                    align: "center",
+                    valign: "middle"
+                }, {
+                    field: "website",
+                    title: "网站",
+                    align: "center",
+                    valign: "middle"
+                }, {
+                    field: "password",
+                    title: "密码",
+                    align: "center",
+                    valign: "middle"
+                }, {
+                    field: "username",
+                    title: "用户名",
+                    align: "center",
+                    valign: "middle"
+                }, ]
+            });
+        };
+
+        //得到查询的参数
+        //oTableInit.queryParams = function (params)
+        //{
+        //    var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+        //        limit: params.limit,   //页面大小
+        //        offset: params.offset,  //页码
+        //        sdate: $("#stratTime").val(),
+        //        edate: $("#endTime").val(),
+        //        sellerid: $("#sellerid").val(),
+        //        orderid: $("#orderid").val(),
+        //        CardNumber: $("#CardNumber").val(),
+        //        maxrows: params.limit,
+        //        pageindex: params.pageNumber,
+        //        portid: $("#portid").val(),
+        //        CardNumber: $("#CardNumber").val(),
+        //        tradetype: $('input:radio[name="tradetype"]:checked').val(),
+        //        success: $('input:radio[name="success"]:checked').val(),
+        //    };
+        //    return temp;
+        //};
+        return oTableInit;
+    };
+
+
+    $("input[name='btnAdd']").click(
+            function ()
+            {
+                $.get("AddUserWeb/index", "", function (data)
+                {
+                    $('#myModal .modal-body').html(data);
+                }
+                );
+                $('#myModal').modal({ show: true, backdrop: false })
+            });
+
+</script>

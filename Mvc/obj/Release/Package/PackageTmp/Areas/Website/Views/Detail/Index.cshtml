@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>网站明细</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="username" class="col-md-2 control-label">网站</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="website" name="website" placeholder="网站">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-5">
+                            <input type="button" class="btn btn-default" name="btnAddWeb" value="添加" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script>
+    $("input[name='btnAddWeb']").click(
+            function ()
+            {
+                if ($("input[name='website']").val() == "")
+                {
+                    alert("请输入网站！");
+                    return;
+                }
+
+                $.post("/Website/detail/AddWebSite", $(".form-horizontal").serialize(), function (msg)
+                {
+                    alert("添加成功");
+                }
+                )
+            }
+        );
+
+</script>

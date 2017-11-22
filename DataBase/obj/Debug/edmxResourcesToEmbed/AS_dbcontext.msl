@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AccountSysModelStoreContainer" CdmEntityContainer="AccountSysEntities">
+    <EntitySetMapping Name="AS_user">
+      <EntityTypeMapping TypeName="AccountSysModel.AS_user">
+        <MappingFragment StoreEntitySet="AS_user">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="uuid" ColumnName="uuid" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AS_website">
+      <EntityTypeMapping TypeName="AccountSysModel.AS_website">
+        <MappingFragment StoreEntitySet="AS_website">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="uuid" ColumnName="uuid" />
+          <ScalarProperty Name="website" ColumnName="website" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AS_user_website">
+      <EntityTypeMapping TypeName="AccountSysModel.AS_user_website">
+        <MappingFragment StoreEntitySet="AS_user_website">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="uuid" ColumnName="uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
