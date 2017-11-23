@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AccountSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AccountSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AS_user">
           <Key>
             <PropertyRef Name="uuid" />
@@ -15,10 +15,9 @@
         </EntityType>
         <EntityType Name="AS_user_website">
           <Key>
-            <PropertyRef Name="userid" />
-            <PropertyRef Name="website" />
+            <PropertyRef Name="uuid" />
           </Key>
-          <Property Name="uuid" Type="varchar" MaxLength="50" />
+          <Property Name="uuid" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="userid" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="website" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="100" />
@@ -37,53 +36,64 @@
           <EntitySet Name="AS_user_website" EntityType="Self.AS_user_website" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AS_website" EntityType="Self.AS_website" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AccountSysModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema Namespace="AccountSysModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AS_user">
           <Key>
             <PropertyRef Name="uuid" />
           </Key>
           <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AS_user_website">
+          <Key>
+            <PropertyRef Name="uuid" />
+          </Key>
+          <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AS_website">
           <Key>
             <PropertyRef Name="uuid" />
           </Key>
           <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="AccountSysEntities">
+        <EntityContainer Name="AccountSysEntitity" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AS_user" EntityType="Self.AS_user" />
+          <EntitySet Name="AS_user_website" EntityType="Self.AS_user_website" />
           <EntitySet Name="AS_website" EntityType="Self.AS_website" />
-          <EntitySet Name="AS_user_website" EntityType="AccountSysModel.AS_user_website" />
         </EntityContainer>
-        <EntityType Name="AS_user_website">
-          <Key>
-            <PropertyRef Name="userid" />
-            <PropertyRef Name="website" />
-          </Key>
-          <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="userid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="website" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AccountSysModelStoreContainer" CdmEntityContainer="AccountSysEntities">
+        <EntityContainerMapping StorageEntityContainer="AccountSysModelStoreContainer" CdmEntityContainer="AccountSysEntitity">
           <EntitySetMapping Name="AS_user">
             <EntityTypeMapping TypeName="AccountSysModel.AS_user">
               <MappingFragment StoreEntitySet="AS_user">
-                <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AS_user_website">
+            <EntityTypeMapping TypeName="AccountSysModel.AS_user_website">
+              <MappingFragment StoreEntitySet="AS_user_website">
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -91,20 +101,9 @@
           <EntitySetMapping Name="AS_website">
             <EntityTypeMapping TypeName="AccountSysModel.AS_website">
               <MappingFragment StoreEntitySet="AS_website">
-                <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="uuid" ColumnName="uuid" />
-                <ScalarProperty Name="website" ColumnName="website" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AS_user_website">
-            <EntityTypeMapping TypeName="AccountSysModel.AS_user_website">
-              <MappingFragment StoreEntitySet="AS_user_website">
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="website" ColumnName="website" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="website" ColumnName="website" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -113,22 +112,22 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <edmx:Designer>
-    <edmx:Connection>
-      <edmx:DesignerInfoPropertySet>
-        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </edmx:DesignerInfoPropertySet>
-    </edmx:Connection>
-    <edmx:Options>
-      <edmx:DesignerInfoPropertySet>
-        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <edmx:DesignerProperty Name="EnablePluralization" Value="false" />
-        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <edmx:DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="无" />
-      </edmx:DesignerInfoPropertySet>
-    </edmx:Options>
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <edmx:Diagrams />
-  </edmx:Designer>
+    <Diagrams></Diagrams>
+  </Designer>
 </edmx:Edmx>

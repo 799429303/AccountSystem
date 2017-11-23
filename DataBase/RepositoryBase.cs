@@ -14,7 +14,7 @@ namespace DataBase
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
 
-        public AccountSysEntities dbContext = new AccountSysEntities();
+        public AccountSysEntitity dbContext = new AccountSysEntitity();
         private DbTransaction dbTransaction { get; set; }
         public IRepositoryBase<T> BeginTrans()
         {
@@ -63,6 +63,12 @@ namespace DataBase
             dbContext.Entry<T>(entity).State = System.Data.Entity.EntityState.Added;
             return dbContext.SaveChanges();
         }
+
+        public int DeleteEntity(string id)
+        {
+            T entity = FindEntity(id);
+            return DeleteEntity(entity);
+        }
         public int DeleteEntity(T entity) 
         {
             dbContext.Set<T>().Attach(entity);
@@ -84,9 +90,9 @@ namespace DataBase
             }
             return dbContext.SaveChanges();
         }
-        public T FindEntity(object id)
+        public T FindEntity(object uuid)
         {
-            return dbContext.Set<T>().Find(id);
+            return dbContext.Set<T>().Find(uuid);
         }
         public T FindEntity(Expression<Func<T, bool>> predicate) 
         {

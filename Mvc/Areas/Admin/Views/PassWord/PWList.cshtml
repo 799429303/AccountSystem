@@ -1,41 +1,28 @@
-﻿<html>
-<head>
-    <title>账号密码网站列表</title>
-</head>
-<body>
+﻿@{
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+
     <table id="table-list" class="table">
     </table>
 
-    <input type="button" name="btnAdd" class="btn" value="添加" />
+<input style="margin-top: 10px;" type="button" name="btnAdd" class="btn btn-default" value="添加" />
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">添加</h4>
-                </div>
-                <div class="modal-body">
-                    <p></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加</h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
-</body>
-
-
-
-</html>
-
-<script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
-<script type="text/javascript" src="~/Scripts/bootstrap-table.min.js"></script>
-<script type="text/javascript" src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+</div>
 <script type="text/javascript">
     $(function ()
     {
@@ -58,10 +45,10 @@
         oTableInit.Init = function ()
         {
             $('#table-list').bootstrapTable({
-                url: '/PwList/GetList',         //请求后台的URL（*）
+                url: '/PassWord/GetList',         //请求后台的URL（*）
                 method: 'post',                      //请求方式（*）
                 //toolbar: '#toolbar',                //工具按钮用哪个容器
-                //striped: true,                      //是否显示行间隔色
+                striped: true,                      //是否显示行间隔色
                 cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
                 //pagination: true,                   //是否显示分页（*）
                 sortable: false,                     //是否启用排序
@@ -73,7 +60,7 @@
                 //pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
                 //strictSearch: true,
                 //clickToSelect: true,                //是否启用点击选中行
-                height: 460,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                //height: 460,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "uuid",                     //每一行的唯一标识，一般为主键列
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                   //是否显示父子表
@@ -86,10 +73,11 @@
                     field: "userid",
                     title: "用户ID",
                     align: "center",
-                    valign: "middle"
+                    valign: "middle",
+                    visible: false,
                 }, {
-                    field: "website",
-                    title: "网站",
+                    field: "username",
+                    title: "用户名",
                     align: "center",
                     valign: "middle"
                 }, {
@@ -98,11 +86,21 @@
                     align: "center",
                     valign: "middle"
                 }, {
-                    field: "username",
-                    title: "用户名",
+                    field: "website",
+                    title: "网站",
                     align: "center",
                     valign: "middle"
-                }, ]
+                },
+                {
+                    title: "操作",
+                    align: "center",
+                    valign: "middle",
+                    formatter: function (value,row, index)
+                    {
+                        return "<a onclick=deleteRow('" + row.uuid + "')>删除</a>";
+                    }
+                }
+                ]
             });
         };
 
@@ -140,5 +138,44 @@
                 );
                 $('#myModal').modal({ show: true, backdrop: false })
             });
-
+    function deleteRow(row)
+    {
+        zeroModal.confirm(
+            {
+                content: '确认删除吗？',
+                contentDetail: '删除后不能恢复',
+                okFn: function ()
+                {
+                    $("#table-list").bootstrapTable("removeByUniqueId", row);
+                    $.ajax(
+                        {
+                            url: "/PassWord/DeletePassWord",
+                            dataType: "json",
+                            type: "POST",
+                            data: { id: row },
+                            success: function (data)
+                            {
+                                if (data == "SUCCESS")
+                                {
+                                    zeroModal.alert({ content: "删除成功！" });
+                                }
+                                else
+                                {
+                                    zeroModal.alert({ content: "删除失败！" });
+                                }
+                            },
+                            error: function (data)
+                            {
+                                zeroModal.alert({ content: "删除失败！" });
+                            },
+                        }
+                        );
+                },
+                cancelFn: function ()
+                {
+                    zeroModal.closeAll();
+                }
+            }
+            );
+    }
 </script>

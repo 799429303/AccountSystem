@@ -58,29 +58,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AS_dbcontext.Context.cs">
+    <Compile Include="AS_DbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AS_dbcontext.Context.tt</DependentUpon>
+      <DependentUpon>AS_DbContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="AS_dbcontext.cs">
+    <Compile Include="AS_DbContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AS_dbcontext.tt</DependentUpon>
+      <DependentUpon>AS_DbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="AS_dbcontext.Designer.cs">
+    <Compile Include="AS_DbContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AS_dbcontext.edmx</DependentUpon>
+      <DependentUpon>AS_DbContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="AS_user.cs">
-      <DependentUpon>AS_dbcontext.tt</DependentUpon>
+      <DependentUpon>AS_DbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="AS_user_website.cs">
-      <DependentUpon>AS_dbcontext.tt</DependentUpon>
+      <DependentUpon>AS_DbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="AS_website.cs">
-      <DependentUpon>AS_dbcontext.tt</DependentUpon>
+      <DependentUpon>AS_DbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DataHelper\Encrypt.cs" />
     <Compile Include="DataHelper\ListHelper.cs" />
@@ -96,29 +96,29 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="AS_dbcontext.edmx">
+    <EntityDeploy Include="AS_DbContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AS_dbcontext.Designer.cs</LastGenOutput>
+      <LastGenOutput>AS_DbContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="AS_dbcontext.edmx.diagram">
-      <DependentUpon>AS_dbcontext.edmx</DependentUpon>
+    <None Include="AS_DbContext.edmx.diagram">
+      <DependentUpon>AS_DbContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AS_dbcontext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AS_dbcontext.edmx</DependentUpon>
-      <LastGenOutput>AS_dbcontext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="AS_dbcontext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AS_dbcontext.edmx</DependentUpon>
-      <LastGenOutput>AS_dbcontext.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="AS_DbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AS_DbContext.edmx</DependentUpon>
+      <LastGenOutput>AS_DbContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AS_DbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AS_DbContext.edmx</DependentUpon>
+      <LastGenOutput>AS_DbContext.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

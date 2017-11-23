@@ -10,12 +10,12 @@ using Newtonsoft.Json;
 
 namespace Mvc.Areas.Admin.Controllers
 {
-    public class PwListController : Controller
+    public class PassWordController : Controller
     {
         //
         // GET: /Admin/PwList/
         [LoginHandler]
-        public ActionResult Index()
+        public ActionResult PWList()
         {
             return View();
         }
@@ -30,6 +30,22 @@ namespace Mvc.Areas.Admin.Controllers
             else
                 ListResult = objMng.FindEntities(U => U.userid == userid);
             return JsonConvert.SerializeObject(ListResult);
+        }
+
+        public JsonResult DeletePassWord(string id)
+        {
+            IRepositoryBase<AS_user_website> objMng = new RepositoryBase<AS_user_website>();
+            int result= objMng.DeleteEntity(id);
+            if (result == 0)
+            {
+                return new JsonResult { Data = "FAIL" };
+            }
+            else
+            {
+                return new JsonResult { Data = "SUCCESS" };
+            }
+            
+            
         }
     }
 }

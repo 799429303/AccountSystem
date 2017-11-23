@@ -16,6 +16,8 @@ E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.Razor.dll
 E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
 E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.WebPages.dll
 E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.WebPages.Razor.dll
+E:\web\Mvc\Mvc.Tests\bin\Debug\DataBase.dll
+E:\web\Mvc\Mvc.Tests\bin\Debug\EntityFramework.dll
 E:\web\Mvc\Mvc.Tests\bin\Debug\Mvc.pdb
 E:\web\Mvc\Mvc.Tests\bin\Debug\Newtonsoft.Json.xml
 E:\web\Mvc\Mvc.Tests\bin\Debug\System.Net.Http.xml
@@ -29,6 +31,8 @@ E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.Razor.xml
 E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.WebPages.xml
 E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 E:\web\Mvc\Mvc.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+E:\web\Mvc\Mvc.Tests\bin\Debug\DataBase.pdb
+E:\web\Mvc\Mvc.Tests\bin\Debug\EntityFramework.xml
 E:\web\Mvc\Mvc.Tests\bin\Debug\zh-Hans\System.Net.Http.resources.dll
 E:\web\Mvc\Mvc.Tests\bin\Debug\zh-Hans\System.Net.Http.Formatting.resources.dll
 E:\web\Mvc\Mvc.Tests\bin\Debug\zh-Hans\System.Net.Http.WebRequest.resources.dll
@@ -43,7 +47,3 @@ E:\web\Mvc\Mvc.Tests\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\web\Mvc\Mvc.Tests\obj\Debug\Mvc.Tests.csprojResolveAssemblyReference.cache
 E:\web\Mvc\Mvc.Tests\obj\Debug\Mvc.Tests.dll
 E:\web\Mvc\Mvc.Tests\obj\Debug\Mvc.Tests.pdb
-E:\web\Mvc\Mvc.Tests\bin\Debug\DataBase.dll
-E:\web\Mvc\Mvc.Tests\bin\Debug\EntityFramework.dll
-E:\web\Mvc\Mvc.Tests\bin\Debug\DataBase.pdb
-E:\web\Mvc\Mvc.Tests\bin\Debug\EntityFramework.xml

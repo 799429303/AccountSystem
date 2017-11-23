@@ -15,7 +15,7 @@ namespace Mvc.Controllers
 
         public ActionResult Index()
         {
-            AccountSysEntities dbcontext = new AccountSysEntities();
+            AccountSysEntitity dbcontext = new AccountSysEntitity();
             var UserList =dbcontext.AS_user.Select(u => u);
             //var UserList = (from c in dbcontext.AS_user
             //                select c.id);

@@ -12,6 +12,7 @@ namespace DataBase
         int Commit();
         int AddEntity(T entity) ;
         int DeleteEntity(T entity) ;
+        int DeleteEntity(string id);
         int ModifyEntity(T entity) ;
         T FindEntity(object id) ;
         T FindEntity(Expression<Func<T, bool>> predicate);

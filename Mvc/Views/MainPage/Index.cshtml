@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>账号管理系统</title>
-    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -63,7 +63,7 @@
         </div><!--container结束-->
     </nav>
     <div style="height:600px">
-        <iframe name="Main" width="100%" height="100%" src="/Admin/PwList" frameborder="0"  seamless></iframe>
+        <iframe name="Main" width="100%" height="100%" src="/Admin/PassWord/PWList" frameborder="0"  seamless></iframe>
 
     </div>
 </body>

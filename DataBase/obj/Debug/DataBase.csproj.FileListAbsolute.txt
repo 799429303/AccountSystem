@@ -16,6 +16,5 @@ E:\web\Mvc\DataBase\bin\Debug\System.Net.Http.Formatting.xml
 E:\web\Mvc\DataBase\bin\Debug\zh-Hans\System.Web.Http.resources.dll
 E:\web\Mvc\DataBase\bin\Debug\zh-Hans\System.Net.Http.resources.dll
 E:\web\Mvc\DataBase\bin\Debug\zh-Hans\System.Net.Http.Formatting.resources.dll
-E:\web\Mvc\DataBase\obj\Debug\DataBase.csprojResolveAssemblyReference.cache
 E:\web\Mvc\DataBase\obj\Debug\DataBase.dll
 E:\web\Mvc\DataBase\obj\Debug\DataBase.pdb
