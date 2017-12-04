@@ -9,7 +9,7 @@ using Mvc.Areas.Admin.Models;
 using DataBase.Handler;
 namespace Mvc.Areas.Admin.Controllers
 {
-    public class AddUserWebController : Controller
+    public class WebController : Controller
     {
         //
         // GET: /Admin/AddUserWeb/
@@ -19,7 +19,7 @@ namespace Mvc.Areas.Admin.Controllers
             return View();
         }
         [AjaxHandler]
-        public int AddUserWebSite()
+        public JsonResult AddUserWebSite()
         {
             AS_user_website userWeb = new AS_user_website();
             userWeb.username = Request["username"];
@@ -28,9 +28,18 @@ namespace Mvc.Areas.Admin.Controllers
             userWeb.userid = ((AS_user)Session["loginuserkey"]).userid;
             userWeb.uuid = Guid.NewGuid().ToString().ToUpper();
             IRepositoryBase<AS_user_website> service = new RepositoryBase<AS_user_website>();
-            service.BeginTrans();
-            service.AddEntity(userWeb);
-            return service.Commit();
+            AS_user_website objtemp= service.FindEntities(p => p.userid == userWeb.userid&&p.website==userWeb.website).FirstOrDefault<AS_user_website>();
+            if (objtemp != null)
+            {
+                return new JsonResult { Data = "FAIL",JsonRequestBehavior=JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                service.BeginTrans();
+                service.AddEntity(userWeb);
+                service.Commit();
+                return new JsonResult { Data = "SUCCESS", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
             
         }
         [HttpPost]

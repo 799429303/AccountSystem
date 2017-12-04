@@ -21,13 +21,13 @@ Layout = "~/Views/Share/_Layout.cshtml";
             <div class="form-group">
                 <label for="username" class="col-md-2 col-sm-2 col-xs-3 control-label">用户名</label>
                 <div class="col-md-4 col-sm-4 col-xs-6">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="用户名" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-md-2 col-sm-2 col-xs-3 control-label">密　码</label>
                 <div class="col-md-4 col-sm-4 col-xs-6">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="密　码">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="密　码" required>
                 </div>
             </div>
             <div class="form-group">
@@ -39,17 +39,19 @@ Layout = "~/Views/Share/_Layout.cshtml";
     </div>
 </body>
 </html>
+@section Scripts{
 <script>
     $(
         function () {
            
             //加载网站下拉列表
-            $.post("/AddUserWeb/GetWebSite", "", function (msg) {
+            $.post("/Web/GetWebSite", "", function (msg)
+            {
                 msg = eval("(" + msg + ")");
                 var strHtml = ""
                 $(msg).each(function (index, item) {
                     strHtml += "<option value='";
-                    strHtml += item.website;
+                    strHtml += item.website;                                  
                     strHtml += "'>";
                     strHtml += item.website;
                     strHtml += "</option>"
@@ -69,34 +71,25 @@ Layout = "~/Views/Share/_Layout.cshtml";
                 website: $("#website option:selected").val(),
             }
             $.ajax({
-                url: "/AddUserWeb/AddUserWebSite",
+                url: "/Web/AddUserWebSite",
                 async: true,
                 data: Jdata,
                 datatype: "json",
-                success: function (msg) {
-zeroModal.closeAll();
-                    zeroModal.alert(
+                success: function (msg)
+                {
+                    if (msg == "SUCCESS")
                     {
-                        content:"添加成功！",
-                        onClosed:function()
-                        {
-                            zeroModal.closeAll();
-                        
-                        }
-
+                        bootbox.alert("添加成功");
                     }
-                    )                 
+                    else
+                    {
+                        bootbox.alert("该网站账号已存在!");
+                    }
+                   
                 },
                 error: function (msg) {
-                     zeroModal.alert(
-                    {
-                        content:"添加失败！",
-                        onClosed:function()
-                        {
-                            zeroModal.closeAll();                         
-                        }
-                    }
-                    ) 
+                    bootbox.alert("添加失败");
+                  
                 }
             });
         }
@@ -108,3 +101,4 @@ zeroModal.closeAll();
         }
         );
 </script>
+}

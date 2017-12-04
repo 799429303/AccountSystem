@@ -10,10 +10,9 @@
   </EntityType>
   <EntityType Name="AS_user_website">
     <Key>
-      <PropertyRef Name="userid" />
-      <PropertyRef Name="website" />
+      <PropertyRef Name="uuid" />
     </Key>
-    <Property Name="uuid" Type="varchar" MaxLength="50" />
+    <Property Name="uuid" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="userid" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="website" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="username" Type="nvarchar" MaxLength="100" />

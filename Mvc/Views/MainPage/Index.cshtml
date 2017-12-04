@@ -25,21 +25,28 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="index">首页</a></li>
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">功能 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">业务功能</li>
-                            <li><a href="/Admin/PwList" target="Main">账号查询</a></li>
+                            <li><a href="/Admin/PassWord/PWList" target="Main">账号查询</a></li>
                             <li><a href="/Admin/AddUserWeb" target="Main">账号添加</a></li>
                             <li><a href="/website/Websitelist" target="Main">网站管理</a></li>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">系统功能</li>
                             <li><a href="#">设置</a></li>
                         </ul>
-                    </li>
+                    </li>-->
+                    <li><a href="/Admin/PassWord/PWList" target="Main">账号查询</a></li>
+                    <li><a href="/website/Websitelist" target="Main">网站管理</a></li>
                 </ul>
                 @{
-                    string username = ((DataBase.AS_user)Session["loginuserkey"]).userid;
+                    string username ="";
+                    if(Session["loginuserkey"]!=null)
+                    {
+                        username= ((DataBase.AS_user)Session["loginuserkey"]).userid;
+                    }
+                    
                     if (string.IsNullOrEmpty(username))
                     {
                         <form class="navbar-form navbar-right">
@@ -50,20 +57,22 @@
                             </div>
                             <button type="button" class="btn btn-default">登录</button>
                         </form>
-                    }
+                }
                     else
                     {
                         <div class="form-group navbar-right">
                             <span>欢迎你：</span><span>@username</span>
                         </div>
-                    }
+                }
                 }
 
-            </div><!--collapse-->
-        </div><!--container结束-->
+            </div>
+            <!--collapse-->
+        </div>
+        <!--container结束-->
     </nav>
-    <div style="height:600px">
-        <iframe name="Main" width="100%" height="100%" src="/Admin/PassWord/PWList" frameborder="0"  seamless></iframe>
+    <div style="height: 600px">
+        <iframe name="Main" width="100%" height="100%" src="/Admin/PassWord/PWList" frameborder="0" seamless></iframe>
 
     </div>
 </body>

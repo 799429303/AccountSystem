@@ -10,7 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Admin/Views/AddUserWeb/Index.cshtml">
-      <publishTime>06/17/2017 21:49:57</publishTime>
+      <publishTime>11/24/2017 22:13:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/PassWord/PWList.cshtml">
+      <publishTime>11/24/2017 21:47:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/PwList/Index.cshtml">
       <publishTime>06/17/2017 21:50:11</publishTime>
@@ -31,7 +34,7 @@
       <publishTime>06/17/2017 23:00:43</publishTime>
     </File>
     <File Include="bin/DataBase.dll">
-      <publishTime>09/27/2017 19:01:18</publishTime>
+      <publishTime>11/24/2017 22:39:58</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>05/04/2017 18:51:57</publishTime>
@@ -46,7 +49,7 @@
       <publishTime>05/04/2017 18:45:13</publishTime>
     </File>
     <File Include="bin/Mvc.dll">
-      <publishTime>09/27/2017 19:10:31</publishTime>
+      <publishTime>11/24/2017 22:39:58</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>05/04/2017 18:45:12</publishTime>
@@ -117,6 +120,21 @@
     <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
       <publishTime>05/04/2017 18:45:13</publishTime>
     </File>
+    <File Include="Content/bootstrap-responsive.css">
+      <publishTime>11/22/2017 23:04:23</publishTime>
+    </File>
+    <File Include="Content/bootstrap-responsive.min.css">
+      <publishTime>11/22/2017 23:04:23</publishTime>
+    </File>
+    <File Include="Content/bootstrap-table-fixed-columns.css">
+      <publishTime>11/06/2017 17:31:38</publishTime>
+    </File>
+    <File Include="Content/bootstrap-table-tree-column.css">
+      <publishTime>11/06/2017 17:31:38</publishTime>
+    </File>
+    <File Include="Content/bootstrap-table.min.css">
+      <publishTime>11/06/2017 17:31:38</publishTime>
+    </File>
     <File Include="Content/bootstrap-theme.css">
       <publishTime>05/05/2017 20:09:29</publishTime>
     </File>
@@ -141,8 +159,38 @@
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>05/05/2017 20:09:29</publishTime>
     </File>
+    <File Include="Content/fonts/icomoon.eot">
+      <publishTime>03/11/2015 18:55:42</publishTime>
+    </File>
+    <File Include="Content/fonts/icomoon.svg">
+      <publishTime>03/11/2015 18:55:42</publishTime>
+    </File>
+    <File Include="Content/fonts/icomoon.ttf">
+      <publishTime>03/11/2015 18:55:42</publishTime>
+    </File>
+    <File Include="Content/fonts/icomoon.woff">
+      <publishTime>03/11/2015 18:55:42</publishTime>
+    </File>
+    <File Include="Content/images/glyphicons-halflings-white.png">
+      <publishTime>11/22/2017 23:04:22</publishTime>
+    </File>
+    <File Include="Content/images/glyphicons-halflings.png">
+      <publishTime>11/22/2017 23:04:23</publishTime>
+    </File>
+    <File Include="Content/img/loading1.gif">
+      <publishTime>08/09/2016 15:39:16</publishTime>
+    </File>
+    <File Include="Content/img/loading2.gif">
+      <publishTime>05/06/2016 14:00:30</publishTime>
+    </File>
+    <File Include="Content/img/max.png">
+      <publishTime>10/21/2016 19:15:00</publishTime>
+    </File>
     <File Include="Content/Login/login.css">
       <publishTime>06/03/2017 22:28:04</publishTime>
+    </File>
+    <File Include="Content/normalize.css">
+      <publishTime>07/08/2013 22:10:00</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>05/27/2017 18:37:40</publishTime>
@@ -267,6 +315,9 @@
     <File Include="Content/themes/base/tooltip.css">
       <publishTime>05/27/2017 18:37:40</publishTime>
     </File>
+    <File Include="Content/zeroModal.css">
+      <publishTime>10/22/2016 21:51:30</publishTime>
+    </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>05/05/2017 20:09:29</publishTime>
     </File>
@@ -286,7 +337,22 @@
       <publishTime>05/04/2017 18:45:10</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/27/2017 01:58:54</publishTime>
+      <publishTime>11/22/2017 23:04:23</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-table-fixed-columns.js">
+      <publishTime>11/06/2017 17:31:45</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-table-tree-column.js">
+      <publishTime>11/06/2017 17:31:45</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-table-zh-CN.min.js">
+      <publishTime>11/06/2017 17:31:45</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-table.js">
+      <publishTime>11/22/2017 23:04:23</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-table.min.js">
+      <publishTime>11/06/2017 17:31:45</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>05/05/2017 20:09:29</publishTime>
@@ -333,14 +399,23 @@
     <File Include="Scripts/jquery.validate.min.js">
       <publishTime>06/10/2017 14:20:19</publishTime>
     </File>
+    <File Include="Scripts/zeroModal.js">
+      <publishTime>10/22/2016 22:43:02</publishTime>
+    </File>
+    <File Include="Scripts/zeroModal.min.js">
+      <publishTime>10/22/2016 22:43:32</publishTime>
+    </File>
     <File Include="Views/Login/Index.cshtml">
       <publishTime>06/16/2017 12:04:17</publishTime>
     </File>
     <File Include="Views/MainPage/Index.cshtml">
-      <publishTime>06/05/2017 19:21:30</publishTime>
+      <publishTime>11/24/2017 21:30:35</publishTime>
     </File>
     <File Include="Views/Register/Index.cshtml">
       <publishTime>06/17/2017 21:48:26</publishTime>
+    </File>
+    <File Include="Views/Share/_Layout.cshtml">
+      <publishTime>11/23/2017 23:40:56</publishTime>
     </File>
     <File Include="Views/UserList/index.cshtml">
       <publishTime>05/05/2017 00:58:40</publishTime>
@@ -349,7 +424,7 @@
       <publishTime>05/04/2017 18:45:10</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/26/2017 22:09:15</publishTime>
+      <publishTime>11/24/2017 22:40:00</publishTime>
     </File>
   </ItemGroup>
 </Project>

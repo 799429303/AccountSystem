@@ -121,9 +121,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AddUserWebController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebController.cs" />
     <Compile Include="Areas\Admin\Controllers\PassWordController.cs" />
-    <Compile Include="Areas\Admin\Models\UserWebViewModel.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Areas\Website\Controllers\DetailController.cs" />
     <Compile Include="Areas\Website\Controllers\WebsitelistController.cs" />
@@ -213,7 +212,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\PassWord\PWList.cshtml" />
-    <Content Include="Areas\Admin\Views\AddUserWeb\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\Index.cshtml" />
     <Content Include="Areas\User\Views\Web.config" />
     <Content Include="Areas\Website\Views\Web.config" />
     <Content Include="Areas\Website\Views\Websitelist\Index.cshtml" />
@@ -222,6 +221,7 @@
     <Content Include="Content\fonts\icomoon.ttf" />
     <Content Include="Content\fonts\icomoon.woff" />
     <None Include="Properties\PublishProfiles\AccountSystem.pubxml" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-table-fixed-columns.js" />
     <Content Include="Scripts\bootstrap-table-tree-column.js" />
     <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
@@ -254,9 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\User\Controllers\" />
-    <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Areas\Website\Models\" />
     <Folder Include="Areas\Website\Views\Shared\" />
