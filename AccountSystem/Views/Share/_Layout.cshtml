@@ -1,0 +1,36 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <title>
+        @{
+            if (ViewBag.Title != null && ViewBag.Title != "")
+            {
+                @ViewBag.Title
+            }
+
+        }
+    </title>
+    <link href="~/Content/Css/BootStrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Css/BootStrap/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="~/Content/Css/BootStrap/bootstrap-table-fixed-columns.css" rel="stylesheet" />
+    <link href="~/content/iconfont/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Dialog/zeroModal.css" rel="stylesheet" />
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <div class="wrapper">
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/BootStrap/jquery.min.js"></script>
+    <script src="~/Scripts/BootStrap/bootstrap.min.js"></script>
+    <script src="~/Scripts/BootStrap/bootstrap-table.min.js"></script>
+    <script src="~/Scripts/BootStrap/bootstrap-table-zh-CN.min.js"></script>
+    <script src="~/Scripts/BootStrap/bootstrap-table-fixed-columns.js"></script>
+    <script src="~/Scripts/BootStrap/common.js"></script>
+    <script src="~/Scripts/Dialog/zeroModal.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

@@ -21,7 +21,7 @@ namespace DataBase.Handler
             if (string.IsNullOrEmpty(WebHelper.WebHelper.GetCookie("loginuserkey")) && HttpContext.Current.Session["loginuserkey"]==null)
             {
                 DataBase.WebHelper.WebHelper.WriteCookie("nfine_login_error", "overdue");
-                filterContext.HttpContext.Response.Write("<script>top.location.href = '/Login/Index';</script>");
+                filterContext.HttpContext.Response.Write("<script>top.location.href = '/User/Login';</script>");
                 return;
             }
         }
