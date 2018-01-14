@@ -21,6 +21,10 @@ namespace Mvc.Controllers
             return View();
         }
 
+        public ActionResult _Header() 
+        {
+            return PartialView();
+        }
         /// <summary>
         /// 登录
         /// </summary>
@@ -137,8 +141,18 @@ namespace Mvc.Controllers
             return Json(new { total = res.Count,rows=res }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AddUserPassWord()
+        public ActionResult AddUserPassWord(string Id)
         {
+            ViewBag.Modal = null;
+            if (!string.IsNullOrEmpty(Id))
+            {
+                IRepositoryBase<AS_user_website> service = new RepositoryBase<AS_user_website>();
+                var res=  service.FindEntity((object)Id.Trim());
+                if (res != null)
+                {
+                    ViewBag.Modal = res;
+                }
+            }
             return View();
         }
 
@@ -146,25 +160,68 @@ namespace Mvc.Controllers
         public JsonResult AddUserWebSite()
         {
             AS_user_website userWeb = new AS_user_website();
-            userWeb.username = Request["username"];
-            userWeb.website = Request["website"];
-            userWeb.password = Request["password"];
+            userWeb.username = Request["username"].Trim();
+            userWeb.website = Request["website"].Trim();
+            userWeb.password = Request["password"].Trim();
             userWeb.userid = ((AS_user)Session["loginuserkey"]).userid;
-            userWeb.uuid = Guid.NewGuid().ToString().ToUpper();
-            IRepositoryBase<AS_user_website> service = new RepositoryBase<AS_user_website>();
-            AS_user_website objtemp = service.FindEntities(p => p.userid == userWeb.userid && p.website == userWeb.website).FirstOrDefault<AS_user_website>();
-            if (objtemp != null)
-            {
-                return new JsonResult { Data = "FAIL", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            userWeb.uuid = Request["uuid"].Trim();
+            if (string.IsNullOrEmpty(userWeb.uuid))
+            {              
+                userWeb.uuid = Guid.NewGuid().ToString().ToUpper();
+                IRepositoryBase<AS_user_website> service = new RepositoryBase<AS_user_website>();
+                AS_user_website objtemp = service.FindEntities(p => p.userid == userWeb.userid && p.website == userWeb.website).FirstOrDefault<AS_user_website>();
+                if (objtemp != null)
+                {
+                    return new JsonResult { Data = "EXSIT", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                else
+                {
+                    service.BeginTrans();
+                    service.AddEntity(userWeb);
+                    service.Commit();
+                    return new JsonResult { Data = "SUCCESS", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
             }
             else
             {
+              
+                IRepositoryBase<AS_user_website> service = new RepositoryBase<AS_user_website>();
                 service.BeginTrans();
-                service.AddEntity(userWeb);
+                var res = service.ModifyEntity(userWeb);
                 service.Commit();
-                return new JsonResult { Data = "SUCCESS", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            }
 
+                if (res > 0)
+                {
+                    return new JsonResult { Data = "SUCCESS", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                else
+                {
+                    return new JsonResult { Data = "FAIL", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+            }
+           
+
+        }
+         [AjaxHandler]
+        public JsonResult Delele(string id)
+        {
+            try
+            {
+                IRepositoryBase<AS_user_website> service = new RepositoryBase<AS_user_website>();
+
+                if (service.DeleteEntity(id) > 0)
+                {
+                    return Json(new { code = "success", msg = "删除成功" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { code = "success", msg = "删除失败" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = "success", msg = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

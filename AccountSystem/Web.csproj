@@ -120,7 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\MainPageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebController.cs" />
     <Compile Include="Global.asax.cs">
@@ -148,6 +147,7 @@
     <Content Include="Content\IconFont\iconfont.js" />
     <Content Include="Content\IconFont\iconfont.svg" />
     <Content Include="Content\Login\login.css" />
+    <Content Include="Content\Css\Web.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -210,15 +210,15 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\MainPage\Index.cshtml" />
     <Content Include="Views\Share\_Layout.cshtml" />
     <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Web\WebList.cshtml" />
     <Content Include="Views\User\UserPasswordList.cshtml" />
-    <Content Include="Views\Web\AddUserWebSite.cshtml" />
     <Content Include="Views\User\AddUserPassWord.cshtml" />
+    <Content Include="Views\Share\_Header.cshtml" />
+    <Content Include="Views\Web\Web.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

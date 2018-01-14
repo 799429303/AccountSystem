@@ -1,0 +1,54 @@
+﻿@model DataBase.AS_website
+@{
+    ViewBag.Title = "Web";
+    Layout = "~/Views/Share/_Layout.cshtml";   
+}
+
+    <form class="form-horizontal" style="width:300px;position:relative;left:100px;top:50px;">
+        <div class="form-group">
+            <label for="web" class="col-sm-3" style="margin-top:10px;text-align:right">网站:</label>
+            <div class="col-md-8 col-sm-8">
+                <input type="text" name="web" class="form-control" value="@Model.website" />
+            </div>
+
+        </div>
+        <input type="hidden" name="uuid" value="@Model.uuid" />
+        <div class="form-group">
+            <div class="col-sm-offset-3">
+                <button style="margin-left:15px" id="btnSave" class="btn btn-primary">保存</button>
+                <button class="btn btn-primary" onclick="javascript:window.parent.zeroModal.closeAll();">取消</button>
+            </div>
+        </div>
+    </form>
+
+@section scripts{
+    <script>
+        $("#btnSave").click(function ()
+        {
+            $.ajax({
+                url: "/Web/Update",
+                data: { uuid: $("input[name='uuid']").val(), web: $("input[name='web']").val() },
+                success: function (data)
+                {
+                    if (data.code == 'success')
+                    {
+                        zeroModal.success({
+                            content: "保存成功！",
+                            onClosed: function ()
+                            {
+                                window.parent.location.reload();
+
+                            }
+                        })
+                    }
+                    else
+                    {
+                        zeroModal.error(data.msg);
+                    }
+                }
+            });
+            return false;
+        })
+
+    </script>
+}

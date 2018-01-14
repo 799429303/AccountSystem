@@ -2,6 +2,7 @@
     ViewBag.Title = "添加账号密码网站";
     Layout = "~/Views/Share/_Layout.cshtml";
 }
+@Html.Partial("~/Views/Share/_Header.cshtml")
 <div id="toolbar">
     <form class="form-inline" role="form" style="float: left; width: 100%" method="post" id="queryForm">
         <div class="form-group" id="time">
@@ -57,7 +58,7 @@
                 showRefresh: false,                 //是否显示刷新按钮
                 minimumCountColumns: 2,             //最少允许的列数
                 clickToSelect: true,                //是否启用点击选中行
-                //height: document.body.scrollHeight - 47,   //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                height: document.body.scrollHeight - 100,   //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 //uniqueId: "Id",                     //每一行的唯一标识，一般为主键列
                 showToggle: false,                  //是否显示详细视图和列表视图的切换按钮
                 cardView: false,                    //是否显示详细视图
@@ -85,15 +86,67 @@
         function formatOperate(value, row, index)
         {
             strResult = "";
-            strResult += "<a style='margin-right:10px;' onclick='Modify(" + row.uuid + ")'>修改</a>";
-            strResult += "<a onclick='Delete(" + row.uuid + ")'>删除</a>";
+            strResult += '<a class="" style="margin-right:10px;" onclick="Modify(\'' + row.uuid + '\')">修改</a>';
+            strResult += '<a onclick="Delete(\'' + row.uuid + '\')">删除</a>';
             return strResult;
         }
+
 
 
         $("#search").click(function ()
         {
             initTable();
         })
+        $("#add").click(function ()
+        {
+            zeroModal.show({ url: "/Web/Web" });
+
+        });
+        function Modify(id)
+        {
+            zeroModal.show({
+                url: "/Web/Web?uuid=" + id,               
+            })
+        }
+
+        function Delete(id)
+        {
+            zeroModal.confirm(
+                {
+                    content: "确认要删除吗？",
+                    okFn: function ()
+                    {
+                        $.ajax({
+                            url: '/Web/DeleteWeb',
+                            data: { uuid: id },
+                            async:false,
+                            success: function (data)
+                            {
+                                if (data.code == 'success')
+                                {
+                                    zeroModal.success({
+                                        content: "删除成功！",
+                                        onClosed: function ()
+                                        {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    zeroModal.error(data.msg);
+                                }
+                            }
+                        });
+                    },
+                    cancelFn: function ()
+                    {
+                        zeroModal.closeAll();
+                    }
+                }
+                )
+
+
+        }
     </script>
 }

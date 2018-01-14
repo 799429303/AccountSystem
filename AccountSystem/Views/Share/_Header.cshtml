@@ -1,13 +1,15 @@
-﻿@{
+﻿<!DOCTYPE html>
+
+@{
     Layout = "~/Views/Share/_Layout.cshtml";
 }
-<!DOCTYPE html>
-<html lang="zh-cn">
+
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>账号管理系统</title>
+    <title>@ViewBag.Title</title>
 </head>
 
 <body>
@@ -24,7 +26,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="index"><span class="glyphicon glyphicon-home"></span>首页</a></li>
+                    <li><a href="/User/UserPasswordList"><span class="glyphicon glyphicon-home"></span>首页</a></li>
                     <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">功能 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -37,33 +39,33 @@
                             <li><a href="#">设置</a></li>
                         </ul>
                     </li>-->
-                    <li><a href="/User/UserList" target="Main"><span class="glyphicon glyphicon-search"></span>  账号查询</a></li>
-                    <li><a href="/Web/WebList" target="Main"><span class="glyphicon glyphicon-cog"></span>  网站管理</a></li>
+                    <li><a href="/User/UserList" target="_self"><span class="glyphicon glyphicon-search"></span>  账号查询</a></li>
+                    <li><a href="/Web/WebList" target="_self"><span class="glyphicon glyphicon-cog"></span>  网站管理</a></li>
                 </ul>
                 @{
-                    string username ="";
-                    if(Session["loginuserkey"]!=null)
+                    string username = "";
+                    if (Session["loginuserkey"] != null)
                     {
-                        username= ((DataBase.AS_user)Session["loginuserkey"]).userid;
+                        username = ((DataBase.AS_user)Session["loginuserkey"]).userid;
                     }
-                    
+
                     if (string.IsNullOrEmpty(username))
                     {
                         <form class="navbar-form navbar-right">
 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="用户名">
-                                <input type="text" class="form-control" placeholder="密码">
+                                <input type="text" class="form-control" name="username" placeholder="用户名">
+                                <input type="text" class="form-control" name="password" placeholder="密码">
                             </div>
-                            <button type="button" class="btn btn-default">登录</button>
+                            <button type="button" onclick="login()" class="btn btn-default">登录</button>
                         </form>
-                }
+                    }
                     else
                     {
                         <div class="form-group navbar-right">
                             <span>欢迎你：</span><span>@username</span>
                         </div>
-                }
+                    }
                 }
 
             </div>
@@ -71,9 +73,30 @@
         </div>
         <!--container结束-->
     </nav>
-    <div class="table-responsive">
-        <iframe name="Main" width="100%" height="100%" src="/User/UserPasswordList" frameborder="0" seamless></iframe>
 
-    </div>
 </body>
 </html>
+@section scripts{
+    <script>
+        function login()
+        {
+            
+            
+            $.ajax({
+                url: "/User/CheckLogin",
+                data: { username: $("input[name='username']").val(), password: $("input[name='password']").val() },
+                success: function (data)
+                {
+                    if (data == "登录成功")
+                    {
+                        window.location.reload();
+                    }
+                    else
+                    {
+                        zeroModal.error(data);
+                    }
+                }
+            })
+        }
+    </script>
+}
