@@ -88,12 +88,17 @@ namespace Mvc.Controllers
                 return "true";
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [AjaxHandler]
         /// <summary>
         /// 注册页面
         /// </summary>
         /// <returns></returns>
-        [AjaxHandler]
-        public ActionResult Register()
+        
+        public ActionResult RegisterUser()
         {
             Encrypt md5 = new Encrypt(Request["password"]);
             IRepositoryBase<AS_user> service = new RepositoryBase<AS_user>();

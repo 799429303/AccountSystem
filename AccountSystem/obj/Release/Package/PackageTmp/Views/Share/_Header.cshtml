@@ -54,10 +54,10 @@
                         <form class="navbar-form navbar-right">
 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="用户名">
-                                <input type="text" class="form-control" placeholder="密码">
+                                <input type="text" class="form-control" name="username" placeholder="用户名">
+                                <input type="text" class="form-control" name="password" placeholder="密码">
                             </div>
-                            <button type="button" class="btn btn-default">登录</button>
+                            <button type="button" onclick="login()" class="btn btn-default">登录</button>
                         </form>
                     }
                     else
@@ -76,3 +76,27 @@
 
 </body>
 </html>
+@section scripts{
+    <script>
+        function login()
+        {
+            
+            
+            $.ajax({
+                url: "/User/CheckLogin",
+                data: { username: $("input[name='username']").val(), password: $("input[name='password']").val() },
+                success: function (data)
+                {
+                    if (data == "登录成功")
+                    {
+                        window.location.reload();
+                    }
+                    else
+                    {
+                        zeroModal.error(data);
+                    }
+                }
+            })
+        }
+    </script>
+}

@@ -86,15 +86,67 @@
         function formatOperate(value, row, index)
         {
             strResult = "";
-            strResult += "<a style='margin-right:10px;' onclick='Modify(" + row.uuid + ")'>修改</a>";
-            strResult += "<a onclick='Delete(" + row.uuid + ")'>删除</a>";
+            strResult += '<a class="" style="margin-right:10px;" onclick="Modify(\'' + row.uuid + '\')">修改</a>';
+            strResult += '<a onclick="Delete(\'' + row.uuid + '\')">删除</a>';
             return strResult;
         }
+
 
 
         $("#search").click(function ()
         {
             initTable();
         })
+        $("#add").click(function ()
+        {
+            zeroModal.show({ url: "/Web/Web" });
+
+        });
+        function Modify(id)
+        {
+            zeroModal.show({
+                url: "/Web/Web?uuid=" + id,               
+            })
+        }
+
+        function Delete(id)
+        {
+            zeroModal.confirm(
+                {
+                    content: "确认要删除吗？",
+                    okFn: function ()
+                    {
+                        $.ajax({
+                            url: '/Web/DeleteWeb',
+                            data: { uuid: id },
+                            async:false,
+                            success: function (data)
+                            {
+                                if (data.code == 'success')
+                                {
+                                    zeroModal.success({
+                                        content: "删除成功！",
+                                        onClosed: function ()
+                                        {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    zeroModal.error(data.msg);
+                                }
+                            }
+                        });
+                    },
+                    cancelFn: function ()
+                    {
+                        zeroModal.closeAll();
+                    }
+                }
+                )
+
+
+        }
     </script>
 }

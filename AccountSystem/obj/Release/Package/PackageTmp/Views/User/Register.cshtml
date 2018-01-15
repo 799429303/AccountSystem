@@ -73,7 +73,7 @@
 
             $.post
             (
-               "Register/Register", { username: $("input[name='username']").val(), password: $("input[name='password']").val() },
+               "/User/RegisterUser", { username: $("input[name='username']").val(), password: $("input[name='password']").val() },
                function (msg)
                {
                    if (msg == "SUCCESS")
@@ -81,7 +81,7 @@
                        $("#myModal .btn").on("click",
                            function ()
                            {
-                               location.href = "/login/index";
+                               location.href = "/User/Login";
                            });
                        $("#myModal .modal-body p").text("注册成功!");
                        $('#myModal').modal('show');
